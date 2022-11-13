@@ -36,7 +36,7 @@ set showcmd
 let g:airline_powerline_fonts = 1
 set splitbelow
 
-nnoremap <leader>e :NERDTreeToggle<CR>
+nnoremap <leader>e :NERDTreeToggle %<CR>
 map <leader>h <C-w>h
 map <leader>j <C-w>j
 map <leader>k <C-w>k
@@ -50,8 +50,8 @@ filetype plugin on
 syntax on
 set encoding=utf-8
 map <TAB> %
-map <leader>pi :PlugInstall<CR>
-map <leader>pc :PlugClean<CR>
+map <leader>pi :PackerInstall<CR>
+map <leader>pc :PackerClean<CR>
 map <leader><leader> :w<CR>
 map <leader>q :q<CR>
 map <leader>wq :wq<CR>

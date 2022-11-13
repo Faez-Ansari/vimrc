@@ -3,15 +3,26 @@ vim.cmd([[packadd packer.nvim]])
 return require("packer").startup(function(use)
 	-- Packer can manage itself
 	use("wbthomason/packer.nvim")
-	use("echasnovski/mini.nvim")
-	use("neovim/nvim-lspconfig") -- Configurations for Nvim LSP
-	use("williamboman/mason.nvim")
-	use("L3MON4D3/LuaSnip")
-	use("saadparwaiz1/cmp_luasnip")
+
+	use("hrsh7th/cmp-nvim-lsp")
 	use("hrsh7th/cmp-buffer")
 	use("hrsh7th/cmp-path")
 	use("hrsh7th/cmp-cmdline")
 	use("hrsh7th/nvim-cmp")
+	use("saadparwaiz1/cmp_luasnip")
+	use({ "tzachar/cmp-tabnine", run = "./install.sh", requires = "hrsh7th/nvim-cmp" })
+	use("nvim-treesitter/nvim-treesitter")
+	use("windwp/nvim-ts-autotag")
+
+	use("echasnovski/mini.nvim")
+	use("neovim/nvim-lspconfig") -- Configurations for Nvim LSP
+	use("williamboman/mason.nvim")
+
+	use("rafamadriz/friendly-snippets")
+	use("L3MON4D3/LuaSnip")
+
+	use("github/copilot.vim")
+	use("aca/emmet-ls")
 	use("williamboman/mason-lspconfig.nvim")
 	use("tpope/vim-surround")
 	use("jreybert/vimagit")

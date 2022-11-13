@@ -1,10 +1,11 @@
 require("plugins")
 require("binds")
-require("vimset")
-require("options")
 require("colorscheme")
+require("vimset")
+require("plugs")
+require("nvim-ts-autotag").setup()
 
 require("mason").setup()
 require("mason-lspconfig").setup()
 
-local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+require("mini.pairs").setup()

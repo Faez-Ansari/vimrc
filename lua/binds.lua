@@ -12,3 +12,5 @@ vim.api.nvim_set_keymap(
 	"<cmd>lua require('fzf-lua').grep_project()<CR>",
 	{ noremap = true, silent = true }
 )
+
+vim.o.updatetime = 250
