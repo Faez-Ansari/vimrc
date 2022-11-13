@@ -1,4 +1,4 @@
-vim.cmd([[ 
+vim.cmd([[
 set title
 set shiftwidth=2
 set tabstop=2
@@ -29,40 +29,43 @@ map <C-c> :bd<cr>
 map <leader>, :edit ~/.config/nvim/init.vim<CR>
 map { {zz
 map } }zz
-let python_highlight_all=1
+set showmode
+set ruler
+set laststatus=2
+set showcmd
+let g:airline_powerline_fonts = 1
+set splitbelow
 
- nnoremap <leader>e :NERDTreeToggle<CR>
- map <leader>h <C-w>h
- map <leader>j <C-w>j
- map <leader>k <C-w>k
- map <leader>l <C-w>l
+nnoremap <leader>e :NERDTreeToggle<CR>
+map <leader>h <C-w>h
+map <leader>j <C-w>j
+map <leader>k <C-w>k
+map <leader>l <C-w>l
 
-  nnoremap n nzz
-  nnoremap N Nzz
-  nnoremap c "_c
-  set nocompatible
-  filetype plugin on
-  syntax on
-  set encoding=utf-8
-  map <TAB> %
-  map <leader>pi :PlugInstall<CR>
-  map <leader>pc :PlugClean<CR>
-  map <leader>s :source ~/.config/nvim/init.vim<CR>
-  map <leader><leader> :w<CR>
-  map <leader>q :q<CR>
-  map <leader>wq :wq<CR>
-  map <leader>l :bnext<cr>
-  map <leader>h :bprevious<cr>
+nnoremap n nzz
+nnoremap N Nzz
+nnoremap c "_c
+set nocompatible
+filetype plugin on
+syntax on
+set encoding=utf-8
+map <TAB> %
+map <leader>pi :PlugInstall<CR>
+map <leader>pc :PlugClean<CR>
+map <leader><leader> :w<CR>
+map <leader>q :q<CR>
+map <leader>wq :wq<CR>
+map <c-l> :bnext<cr>
+map <c-h> :bprevious<cr>
 
-  let g:vimwiki_ext2syntax = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
-  map <leader>v :VimwikiIndex
-  let g:vimwiki_list = [{'path': '~/vimwiki', 'syntax': 'markdown', 'ext': '.md'}]
-  autocmd BufRead,BufNewFile /tmp/calcurse*,~/.calcurse/notes/* set filetype=markdown
-  autocmd BufRead,BufNewFile *.ms,*.me,*.mom,*.man set filetype=groff
-  autocmd BufRead,BufNewFile *.tex set filetype=tex
+let g:vimwiki_ext2syntax = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
+map <leader>v :VimwikiIndex
+let g:vimwiki_list = [{'path': '~/vimwiki', 'syntax': 'markdown', 'ext': '.md'}]
+autocmd BufRead,BufNewFile /tmp/calcurse*,~/.calcurse/notes/* set filetype=markdown
+autocmd BufRead,BufNewFile *.ms,*.me,*.mom,*.man set filetype=groff
+autocmd BufRead,BufNewFile *.tex set filetype=tex
 
 let g:fzf_layout = {'window':{'width':0.8,'height':0.8}}
-nnoremap <leader>r :Rg<CR>
 nnoremap <leader>b :Buffer<CR>
 
 let FZF_DEFAULT_COMMAND='rg --files'
@@ -81,5 +84,10 @@ nnoremap <silent> [fzf-p]pl    :Git pull<CR>
 nnoremap <silent> [fzf-p]c     :GBranches<CR>
 nnoremap <silent> [fzf-p]t     :Git stash<CR>
 nnoremap <silent> [fzf-p]tp     :Git stash pop<CR>
+
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+let g:airline_powerline_fonts = 1
+let g:airline_theme='murmur'
 
 ]])
