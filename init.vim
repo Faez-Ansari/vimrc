@@ -40,10 +40,16 @@ Plug 'mlaursen/vim-react-snippets'
 Plug 'nvie/vim-flake8'
 Plug 'tpope/vim-repeat'
 Plug 'iamcco/markdown-preview.vim'
-Plug 'ryanoasis/vim-devicons'
+Plug 'nvim-tree/nvim-web-devicons'
 Plug 'preservim/nerdtree'
 Plug 'PhilRunninger/nerdtree-visual-selection'
 Plug 'hankchiutw/nerdtree-ranger.vim'
+Plug 'navarasu/onedark.nvim'
+Plug 'ibhagwan/fzf-lua'
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
+Plug 'nvim-lua/plenary.nvim'
+Plug 'BurntSushi/ripgrep'
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
 call plug#end()
 
 set title
@@ -55,10 +61,6 @@ set go=a
 set mouse=a
 set nohlsearch
 set clipboard+=unnamedplus
-set noshowmode
-set noruler
-set laststatus=0
-set noshowcmd
 set smartcase
 set scrolloff=10
 set cursorline
@@ -78,11 +80,19 @@ map <leader>, :edit ~/.config/nvim/init.vim<CR>
 map { {zz
 map } }zz
 let python_highlight_all=1
-
+set showmode
+set ruler
+set laststatus=2
+set showcmd
 " Auto resizing splits
 autocmd VimResized * wincmd =
 
-colorscheme monokai
+let g:onedark_config = {
+    \ 'style': 'deep',
+    \ 'transparent': 'true'
+\}
+
+colorscheme onedark
 set termguicolors
 let g:vim_jsx_pretty_template_tags=['html','js','jsx']
 
@@ -203,9 +213,8 @@ nnoremap <leader>H :call ToggleHiddenAll()<CR>
 
 " fzf
 let g:fzf_layout = {'window':{'width':0.8,'height':0.8}}
-nnoremap <leader>f :CocCommand fzf-preview.ProjectMruFiles<CR>
-nnoremap <leader>F :CocCommand fzf-preview.MruFiles<CR>
-nnoremap <leader>r :Rg<CR>
+nnoremap <leader>f <cmd>Telescope oldfiles<cr>
+nnoremap <leader>r <cmd>Telescope live_grep<CR>
 nnoremap <leader>b :Buffer<CR>
 
 let FZF_DEFAULT_COMMAND='rg --files'
