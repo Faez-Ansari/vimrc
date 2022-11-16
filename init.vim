@@ -44,6 +44,8 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'preservim/nerdtree'
 Plug 'PhilRunninger/nerdtree-visual-selection'
 Plug 'hankchiutw/nerdtree-ranger.vim'
+Plug 'navarasu/onedark.nvim'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 call plug#end()
 
 set title
@@ -55,10 +57,8 @@ set go=a
 set mouse=a
 set nohlsearch
 set clipboard+=unnamedplus
-set noshowmode
-set noruler
-set laststatus=0
-set noshowcmd
+set laststatus=1
+set showcmd
 set smartcase
 set scrolloff=10
 set cursorline
@@ -78,11 +78,20 @@ map <leader>, :edit ~/.config/nvim/init.vim<CR>
 map { {zz
 map } }zz
 let python_highlight_all=1
+set ruler
+set laststatus=2
+set showcmd
 
 " Auto resizing splits
 autocmd VimResized * wincmd =
 
-colorscheme monokai
+let g:onedark_config = {
+  \ 'style': 'deep',
+  \ 'ending_tildes': v:true,
+  \ 'transparent': v:true,
+\ }
+
+colorscheme onedark
 set termguicolors
 let g:vim_jsx_pretty_template_tags=['html','js','jsx']
 
@@ -229,7 +238,7 @@ nnoremap <silent> [fzf-p]/     :CocCommand fzf-preview.Lines --add-fzf-arg=--no-
 nnoremap <silent> [fzf-p]*     :CocCommand fzf-preview.Lines --add-fzf-arg=--no-sort --add-fzf-arg=--query="'<C-r>=expand('<cword>')<CR>"<CR>
 nnoremap          [fzf-p]r     :CocCommand fzf-preview.ProjectGrep<Space>
 xnoremap          [fzf-p]r     "sy:-F<Space>"<C-r>=substitute(substitute(@s, '\n', '', 'g'), '/', '\\/', 'g')<CR>"
-nnoremap <silent> [fzf-p]ps    :Git push -u origin HEAD<CR>
+nnoremap <silent> [fzf-p]ps    :!~/.scripts/origin.sh <CR>
 nnoremap <silent> [fzf-p]pl    :Git pull<CR>
 nnoremap <silent> [fzf-p]c     :GBranches<CR>
 nnoremap <silent> [fzf-p]t     :Git stash<CR>
@@ -295,7 +304,7 @@ endfunc
 
 "" Explorer
 " nnmap <leader>e <Cmd>CocCommand explorer<CR>
-nnoremap <leader>e :NERDTreeToggle<CR>
+nnoremap <leader>e :NERDTreeToggle %<CR>
 
 " CamelCase
 map <silent> w <Plug>CamelCaseMotion_w
@@ -316,7 +325,7 @@ sunmap e
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline_powerline_fonts = 1
-let g:airline_theme='murmur'
+let g:airline_theme='distinguished'
 
 " Markdwon preview
 nmap <silent> <F8> <Plug>MarkdownPreview
