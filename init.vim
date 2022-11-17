@@ -45,7 +45,8 @@ Plug 'preservim/nerdtree'
 Plug 'PhilRunninger/nerdtree-visual-selection'
 Plug 'hankchiutw/nerdtree-ranger.vim'
 Plug 'navarasu/onedark.nvim'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'ThePrimeagen/harpoon'
+Plug 'nvim-lua/plenary.nvim'
 call plug#end()
 
 set title
@@ -191,25 +192,6 @@ if &diff
     highlight! link DiffText MatchParen
 endif
 
-" Function for toggling the bottom statusbar:
-let s:hidden_all = 1
-function! ToggleHiddenAll()
-    if s:hidden_all  == 0
-        let s:hidden_all = 1
-        set noshowmode
-        set noruler
-        set laststatus=0
-        set noshowcmd
-    else
-        let s:hidden_all = 0
-        set showmode
-        set ruler
-        set laststatus=2
-        set showcmd
-    endif
-endfunction
-nnoremap <leader>H :call ToggleHiddenAll()<CR>
-
 " fzf
 let g:fzf_layout = {'window':{'width':0.8,'height':0.8}}
 nnoremap <leader>f :CocCommand fzf-preview.ProjectMruFiles<CR>
@@ -220,10 +202,9 @@ nnoremap <leader>b :Buffer<CR>
 let FZF_DEFAULT_COMMAND='rg --files'
 let FZF_DEFAULT_OPTS='-m --height 50% --border --reverse'
 
-command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
+command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
+
 " Fugitive
-
-
 nmap <Leader>g [fzf-p]
 xmap <Leader>g [fzf-p]
 
@@ -242,7 +223,7 @@ nnoremap <silent> [fzf-p]ps    :!~/.scripts/origin.sh <CR>
 nnoremap <silent> [fzf-p]pl    :Git pull<CR>
 nnoremap <silent> [fzf-p]c     :GBranches<CR>
 nnoremap <silent> [fzf-p]t     :Git stash<CR>
-nnoremap <silent> [fzf-p]tp     :Git stash pop<CR>
+nnoremap <silent> [fzf-p]tp    :Git stash pop<CR>
 
 " Coc
 
@@ -329,3 +310,20 @@ let g:airline_theme='distinguished'
 
 " Markdwon preview
 nmap <silent> <F8> <Plug>MarkdownPreview
+
+" Harpoon
+nnoremap <leader>a :lua require("harpoon.mark").add_file()<CR>
+nnoremap <leader>H :lua require("harpoon.ui").toggle_quick_menu()<CR>
+nnoremap <leader>- :lua require("harpoon.ui").nav_next()<CR>
+nnoremap <leader>= :lua require("harpoon.ui").nav_prev()<CR>
+nnoremap <leader>1 :lua require("harpoon.ui").nav_file(1)<CR>
+nnoremap <leader>2 :lua require("harpoon.ui").nav_file(2)<CR>
+nnoremap <leader>3 :lua require("harpoon.ui").nav_file(3)<CR>
+nnoremap <leader>4 :lua require("harpoon.ui").nav_file(4)<CR>
+nnoremap <leader>5 :lua require("harpoon.ui").nav_file(5)<CR>
+nnoremap <leader>6 :lua require("harpoon.ui").nav_file(6)<CR>
+nnoremap <leader>7 :lua require("harpoon.ui").nav_file(7)<CR>
+nnoremap <leader>8 :lua require("harpoon.ui").nav_file(8)<CR>
+nnoremap <leader>9 :lua require("harpoon.ui").nav_file(9)<CR>
+nnoremap <leader>t1 :lua require("harpoon.term").gotoTerminal(1)<CR>
+nnoremap <leader>t2 :lua require("harpoon.term").gotoTerminal(2)<CR>
