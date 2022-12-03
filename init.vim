@@ -47,6 +47,7 @@ Plug 'hankchiutw/nerdtree-ranger.vim'
 Plug 'navarasu/onedark.nvim'
 Plug 'ThePrimeagen/harpoon'
 Plug 'nvim-lua/plenary.nvim'
+Plug 'github/copilot.vim'
 call plug#end()
 
 set title
@@ -60,6 +61,7 @@ set nohlsearch
 set clipboard+=unnamedplus
 set laststatus=1
 set showcmd
+set ignorecase
 set smartcase
 set scrolloff=10
 set cursorline
