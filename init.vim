@@ -48,6 +48,8 @@ Plug 'navarasu/onedark.nvim'
 Plug 'ThePrimeagen/harpoon'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'github/copilot.vim'
+Plug 'phaazon/hop.nvim'
+Plug 'wellle/context.vim'
 call plug#end()
 
 set title
@@ -329,3 +331,7 @@ nnoremap <leader>8 :lua require("harpoon.ui").nav_file(8)<CR>
 nnoremap <leader>9 :lua require("harpoon.ui").nav_file(9)<CR>
 nnoremap <leader>t1 :lua require("harpoon.term").gotoTerminal(1)<CR>
 nnoremap <leader>t2 :lua require("harpoon.term").gotoTerminal(2)<CR>
+
+" Hop
+
+map <leader>J :HopWord<CR>
