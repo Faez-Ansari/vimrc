@@ -21,8 +21,7 @@ Plug 'ap/vim-css-color'
 Plug 'junegunn/fzf',{'do':{-> fzf#install()}}
 Plug 'junegunn/fzf.vim'
 Plug 'stsewd/fzf-checkout.vim'
-Plug 'tpope/vim-fugitive'
-Plug 'sbdchd/neoformat'
+Plug 'tpope/vim-fugitive' Plug 'sbdchd/neoformat'
 Plug 'itchyny/vim-gitbranch'
 Plug 'wakatime/vim-wakatime'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -67,7 +66,7 @@ set ignorecase
 set smartcase
 set scrolloff=10
 set cursorline
-set so=20
+set so=15
 set nobackup
 set nowb
 set noswapfile
@@ -333,5 +332,7 @@ nnoremap <leader>t1 :lua require("harpoon.term").gotoTerminal(1)<CR>
 nnoremap <leader>t2 :lua require("harpoon.term").gotoTerminal(2)<CR>
 
 " Hop
-
 map <leader>J :HopWord<CR>
+
+" Rename
+nmap <F2> <Plug>(coc-rename)
