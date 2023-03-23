@@ -13,7 +13,7 @@ Plug 'tpope/vim-surround'
 Plug 'junegunn/goyo.vim'
 Plug 'jreybert/vimagit'
 Plug 'lukesmithxyz/vimling'
-Plug 'vimwiki/vimwiki'
+" Plug 'vimwiki/vimwiki'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-commentary'
@@ -21,7 +21,8 @@ Plug 'ap/vim-css-color'
 Plug 'junegunn/fzf',{'do':{-> fzf#install()}}
 Plug 'junegunn/fzf.vim'
 Plug 'stsewd/fzf-checkout.vim'
-Plug 'tpope/vim-fugitive' Plug 'sbdchd/neoformat'
+Plug 'tpope/vim-fugitive'
+Plug 'sbdchd/neoformat'
 Plug 'itchyny/vim-gitbranch'
 Plug 'wakatime/vim-wakatime'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -40,15 +41,18 @@ Plug 'nvie/vim-flake8'
 Plug 'tpope/vim-repeat'
 Plug 'iamcco/markdown-preview.vim'
 Plug 'ryanoasis/vim-devicons'
-Plug 'preservim/nerdtree'
-Plug 'PhilRunninger/nerdtree-visual-selection'
-Plug 'hankchiutw/nerdtree-ranger.vim'
+" Plug 'preservim/nerdtree'
+" Plug 'PhilRunninger/nerdtree-visual-selection'
+" Plug 'hankchiutw/nerdtree-ranger.vim'
 Plug 'navarasu/onedark.nvim'
 Plug 'ThePrimeagen/harpoon'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'github/copilot.vim'
 Plug 'phaazon/hop.nvim'
 Plug 'wellle/context.vim'
+Plug 'AndrewRadev/tagalong.vim'
+Plug 'nvim-tree/nvim-tree.lua'
+Plug 'lukas-reineke/indent-blankline.nvim'
 call plug#end()
 
 set title
@@ -95,6 +99,9 @@ let g:onedark_config = {
   \ 'transparent': v:true,
 \ }
 
+" Keep the copy after select pasting
+xmap p "_dP
+
 colorscheme onedark
 set termguicolors
 let g:vim_jsx_pretty_template_tags=['html','js','jsx']
@@ -118,6 +125,9 @@ let g:vim_jsx_pretty_template_tags=['html','js','jsx']
   map <leader>wq :wq<CR>
   map <leader>l :bnext<cr>
   map <leader>h :bprevious<cr>
+  tnoremap <C-n> <C-\><C-n>
+  map <C-t> :vsp <CR> :terminal<CR>
+  map <C-f> <C-f>zz
 
 " Enable autocompletion:
 	set wildmode=longest,list,full
@@ -162,11 +172,12 @@ let g:vim_jsx_pretty_template_tags=['html','js','jsx']
 
 " Ensure files are read as what I want:
 	let g:vimwiki_ext2syntax = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
-	map <leader>v :VimwikiIndex
+	" map <leader>v :VimwikiIndex
 	let g:vimwiki_list = [{'path': '~/vimwiki', 'syntax': 'markdown', 'ext': '.md'}]
 	autocmd BufRead,BufNewFile /tmp/calcurse*,~/.calcurse/notes/* set filetype=markdown
 	autocmd BufRead,BufNewFile *.ms,*.me,*.mom,*.man set filetype=groff
 	autocmd BufRead,BufNewFile *.tex set filetype=tex
+  au filetype vimwiki silent! iunmap <buffer> <Tab>
 
 " Save file as sudo on files that require root permission
 	cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
@@ -288,7 +299,7 @@ endfunc
 
 "" Explorer
 " nnmap <leader>e <Cmd>CocCommand explorer<CR>
-nnoremap <leader>e :NERDTreeToggle %<CR>
+nnoremap <leader>e :NvimTreeToggle %<CR>
 
 " CamelCase
 map <silent> w <Plug>CamelCaseMotion_w
@@ -307,7 +318,7 @@ sunmap e
 " Airline
 
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#formatter = 'unique_tail'
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 let g:airline_powerline_fonts = 1
 let g:airline_theme='distinguished'
 
@@ -336,3 +347,64 @@ map <leader>J :HopWord<CR>
 
 " Rename
 nmap <F2> <Plug>(coc-rename)
+
+" React Refactor
+xmap <leader>u  <Plug>(coc-codeaction-selected)
+nmap <leader>u  <Plug>(coc-codeaction-selected)
+
+
+" NvimTree
+
+" lua config for nvimtree
+lua << EOF
+require("nvim-tree").setup {
+  auto_close = true,
+  update_cwd = true,
+  update_focused_file = {
+    enable = true,
+    update_cwd = true,
+  },
+  view = {
+    width = 30,
+    side = "left",
+    auto_resize = true,
+    mappings = {
+      custom_only = false,
+      list = {
+        { key = { "l", "<CR>", "o" }, cb = require("nvim-tree.config").nvim_tree_callback("edit") },
+        { key = { "h" }, cb = require("nvim-tree.config").nvim_tree_callback("close_node") },
+        { key = { "v" }, cb = require("nvim-tree.config").nvim_tree_callback("vsplit") },
+        { key = { "s" }, cb = require("nvim-tree.config").nvim_tree_callback("split") },
+        { key = { "t" }, cb = require("nvim-tree.config").nvim_tree_callback("tabnew") },
+        { key = { "<C-]>" }, cb = require("nvim-tree.config").nvim_tree_callback("cd") },
+        { key = { "<BS>" }, cb = require("nvim-tree.config").nvim_tree_callback("dir_up") },
+        { key = { "q" }, cb = require("nvim-tree.config").nvim_tree_callback("close") },
+        { key = { "g?" }, cb = require("nvim-tree.config").nvim_tree_callback("toggle_help") },
+      },
+    },
+  },
+}
+
+EOF
+
+" indent block
+
+lua << EOF
+vim.opt.termguicolors = true
+vim.cmd [[highlight IndentBlanklineIndent1 guifg=#E06C75 gui=nocombine]]
+vim.cmd [[highlight IndentBlanklineIndent2 guifg=#E5C07B gui=nocombine]]
+vim.cmd [[highlight IndentBlanklineIndent3 guifg=#98C379 gui=nocombine]]
+vim.cmd [[highlight IndentBlanklineIndent4 guifg=#56B6C2 gui=nocombine]]
+vim.cmd [[highlight IndentBlanklineIndent5 guifg=#61AFEF gui=nocombine]]
+vim.cmd [[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]]
+
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+require("indent_blankline").setup {
+    space_char_blankline = " ",
+    show_end_of_line = false,
+    auto_close = false,
+}
+
+EOF

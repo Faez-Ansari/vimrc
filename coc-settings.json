@@ -19,15 +19,6 @@
   "eslint.options": {
     "extensions": [".js", ".jsx", ".ts", ".tsx"]
   },
-  "coc.preferences.formatOnSaveFiletypes": [
-    "css",
-    "scss",
-    "markdown",
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact",
-    "json",
-    "vim"
-  ]
+  "coc.preferences.formatOnSave": true,
+  "snippets.ultisnips.pythonPrompt": false
 }
