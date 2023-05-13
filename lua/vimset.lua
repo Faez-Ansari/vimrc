@@ -27,6 +27,7 @@ map <C-l> :bnext<cr>
 map <C-h> :bprevious<cr>
 map <C-c> :bd<cr>
 map <leader>, :edit ~/.config/nvim/init.vim<CR>
+map <leader>s :source $MYVIMRC
 map { {zz
 map } }zz
 set showmode
