@@ -14,11 +14,10 @@ Plug 'junegunn/goyo.vim'
 Plug 'jreybert/vimagit'
 Plug 'lukesmithxyz/vimling'
 " Plug 'vimwiki/vimwiki'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-commentary'
 Plug 'ap/vim-css-color'
 Plug 'junegunn/fzf',{'do':{-> fzf#install()}}
+Plug 'ibhagwan/fzf-lua', {'branch': 'main'}
 Plug 'junegunn/fzf.vim'
 Plug 'stsewd/fzf-checkout.vim'
 Plug 'tpope/vim-fugitive'
@@ -53,7 +52,25 @@ Plug 'wellle/context.vim'
 Plug 'AndrewRadev/tagalong.vim'
 Plug 'nvim-tree/nvim-tree.lua'
 Plug 'lukas-reineke/indent-blankline.nvim'
+Plug 'vim-pandoc/vim-pandoc'
+Plug 'vim-pandoc/vim-pandoc-syntax'
+Plug 'prisma/vim-prisma'
+Plug 'nanotech/jellybeans.vim'
+Plug 'tomasr/molokai'
+Plug 'jacoborus/tender.vim'
+Plug 'jparise/vim-graphql'
+Plug 'chrisbra/csv.vim'
+Plug 'ThePrimeagen/vim-be-good'
+Plug 'tpope/vim-unimpaired'
+Plug 'benwainwright/fzf-project'
+Plug 'vim-airline/vim-airline'
 call plug#end()
+
+let g:jellybeans_use_term_italics = 1
+let g:rustfmt_autosave = 1
+let g:rust_cargo_use_clippy = 1
+let g:csv_arrange_align ='l*'
+let g:csv_arrange_use_all_rows = 1
 
 set title
 set shiftwidth=2
@@ -103,7 +120,8 @@ let g:onedark_config = {
 xmap p "_dP
 
 colorscheme onedark
-set termguicolors
+" colorscheme molokai
+" set termguicolors
 let g:vim_jsx_pretty_template_tags=['html','js','jsx']
 
 :echo gitbranch#name()
@@ -162,7 +180,7 @@ let g:vim_jsx_pretty_template_tags=['html','js','jsx']
 	nnoremap S :%s//g<Left><Left>
 
 " Compile document, be it groff/LaTeX/markdown/etc.
-	map <leader>C :w! \| !compiler "<c-r>%"<CR>
+	map <C-p> :Pandoc pdf<CR>
 
 " Open corresponding .pdf/.html or preview
 	map <leader>p :!opout <c-r>%<CR><CR>
@@ -209,7 +227,7 @@ endif
 " fzf
 let g:fzf_layout = {'window':{'width':0.8,'height':0.8}}
 nnoremap <leader>f :CocCommand fzf-preview.ProjectMruFiles<CR>
-nnoremap <leader>F :CocCommand fzf-preview.MruFiles<CR>
+nnoremap <leader>Ff :CocCommand fzf-preview.MruFiles<CR>
 nnoremap <leader>r :Rg<CR>
 nnoremap <leader>b :Buffer<CR>
 
@@ -298,8 +316,8 @@ function! s:select_current_word()
 endfunc
 
 "" Explorer
-" nnmap <leader>e <Cmd>CocCommand explorer<CR>
-nnoremap <leader>e :NvimTreeToggle %<CR>
+" nmap <leader>e <Cmd>CocCommand explorer<CR>
+nnoremap <leader>e :NvimTreeToggle<CR>
 
 " CamelCase
 map <silent> w <Plug>CamelCaseMotion_w
@@ -317,8 +335,8 @@ sunmap e
 
 " Airline
 
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+" let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 let g:airline_powerline_fonts = 1
 let g:airline_theme='distinguished'
 
@@ -376,7 +394,7 @@ require("nvim-tree").setup {
         { key = { "v" }, cb = require("nvim-tree.config").nvim_tree_callback("vsplit") },
         { key = { "s" }, cb = require("nvim-tree.config").nvim_tree_callback("split") },
         { key = { "t" }, cb = require("nvim-tree.config").nvim_tree_callback("tabnew") },
-        { key = { "<C-]>" }, cb = require("nvim-tree.config").nvim_tree_callback("cd") },
+        { key = { "<CR>" }, cb = require("nvim-tree.config").nvim_tree_callback("cd") },
         { key = { "<BS>" }, cb = require("nvim-tree.config").nvim_tree_callback("dir_up") },
         { key = { "q" }, cb = require("nvim-tree.config").nvim_tree_callback("close") },
         { key = { "g?" }, cb = require("nvim-tree.config").nvim_tree_callback("toggle_help") },
@@ -387,10 +405,7 @@ require("nvim-tree").setup {
 
 EOF
 
-" indent block
-
 lua << EOF
-vim.opt.termguicolors = true
 vim.cmd [[highlight IndentBlanklineIndent1 guifg=#E06C75 gui=nocombine]]
 vim.cmd [[highlight IndentBlanklineIndent2 guifg=#E5C07B gui=nocombine]]
 vim.cmd [[highlight IndentBlanklineIndent3 guifg=#98C379 gui=nocombine]]
@@ -398,8 +413,6 @@ vim.cmd [[highlight IndentBlanklineIndent4 guifg=#56B6C2 gui=nocombine]]
 vim.cmd [[highlight IndentBlanklineIndent5 guifg=#61AFEF gui=nocombine]]
 vim.cmd [[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]]
 
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
 
 require("indent_blankline").setup {
     space_char_blankline = " ",
@@ -408,3 +421,7 @@ require("indent_blankline").setup {
 }
 
 EOF
+
+let g:pandoc#modules#disabled = ["spell"]
+let g:fzfSwitchProjectWorkspaces = [ '~/Work/Udja', '~/Work/projects', '~/Work/Training\ Area' ]
+nnoremap <leader>Fp :FzfSwitchProject<CR>

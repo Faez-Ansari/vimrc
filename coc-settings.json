@@ -4,11 +4,7 @@
   "diagnostic.infoSign": "",
   "diagnostic.hintSign": "",
   "javascript.updateImportsOnFileMove.enabled": "prompt",
-  "editor.formatOnSave": true,
   "typescript.suggest.autoImports": true,
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
-  },
   "eslint.validate": [
     "javascript",
     "javascriptreact",
@@ -20,5 +16,10 @@
     "extensions": [".js", ".jsx", ".ts", ".tsx"]
   },
   "coc.preferences.formatOnSave": true,
-  "snippets.ultisnips.pythonPrompt": false
+  "snippets.ultisnips.pythonPrompt": false,
+  "javascript.format.enable": false,
+  "eslint.autoFixOnSave": true,
+  "files.associations": {
+    "*.json": "jsonc"
+  }
 }
