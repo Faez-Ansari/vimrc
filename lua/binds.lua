@@ -2,7 +2,7 @@ vim.g.mapleader = " "
 vim.api.nvim_set_keymap(
 	"n",
 	"<leader>f",
-	"<cmd>lua require('fzf-lua').oldfiles()<CR>",
+	"<cmd>lua require('fzf-lua').git_files()<CR>",
 	{ noremap = true, silent = true }
 )
 

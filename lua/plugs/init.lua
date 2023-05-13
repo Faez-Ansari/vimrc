@@ -1,4 +1,5 @@
 require("plugs/lsp")
 require("plugs/nullLs")
-require('plugs/cmp')
-require('plugs/treesitter')
+require("plugs/cmp")
+require("plugs/treesitter")
+require("plugs/nvimtree")
