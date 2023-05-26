@@ -13,7 +13,7 @@ Plug 'tpope/vim-surround'
 Plug 'junegunn/goyo.vim'
 Plug 'jreybert/vimagit'
 Plug 'lukesmithxyz/vimling'
-" Plug 'vimwiki/vimwiki'
+Plug 'vimwiki/vimwiki'
 Plug 'tpope/vim-commentary'
 Plug 'ap/vim-css-color'
 Plug 'junegunn/fzf',{'do':{-> fzf#install()}}
@@ -35,7 +35,6 @@ Plug 'maxmellon/vim-jsx-pretty'
 Plug 'dikiaap/minimalist'
 Plug 'yuezk/vim-js'
 Plug 'mhinz/vim-startify'
-Plug 'mlaursen/vim-react-snippets'
 Plug 'nvie/vim-flake8'
 Plug 'tpope/vim-repeat'
 Plug 'iamcco/markdown-preview.vim'
@@ -64,6 +63,8 @@ Plug 'ThePrimeagen/vim-be-good'
 Plug 'tpope/vim-unimpaired'
 Plug 'benwainwright/fzf-project'
 Plug 'vim-airline/vim-airline'
+Plug 'mbbill/undotree'
+Plug 'rbong/vim-flog'
 call plug#end()
 
 let g:jellybeans_use_term_italics = 1
@@ -188,8 +189,7 @@ let g:vim_jsx_pretty_template_tags=['html','js','jsx']
 " Runs a script that cleans out tex build files whenever I close out of a .tex file.
 	autocmd VimLeave *.tex !texclear %
 
-" Ensure files are read as what I want:
-	let g:vimwiki_ext2syntax = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
+" Ensure files are read as what I want: let g:vimwiki_ext2syntax = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
 	" map <leader>v :VimwikiIndex
 	let g:vimwiki_list = [{'path': '~/vimwiki', 'syntax': 'markdown', 'ext': '.md'}]
 	autocmd BufRead,BufNewFile /tmp/calcurse*,~/.calcurse/notes/* set filetype=markdown
@@ -236,11 +236,34 @@ let FZF_DEFAULT_OPTS='-m --height 50% --border --reverse'
 
 command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
 
+
+" Snippets
+
+
+" Use <C-l> for trigger snippet expand.
+imap <C-l> <Plug>(coc-snippets-expand)
+
+" Use <C-j> for select text for visual placeholder of snippet.
+vmap <C-j> <Plug>(coc-snippets-select)
+
+" Use <C-j> for jump to next placeholder, it's default of coc.nvim
+let g:coc_snippet_next = '<c-j>'
+
+" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
+let g:coc_snippet_prev = '<c-k>'
+
+" Use <C-j> for both expand and jump (make expand higher priority.)
+imap <C-j> <Plug>(coc-snippets-expand-jump)
+
+" Use <leader>x for convert visual selected code to snippet
+xmap <leader>x  <Plug>(coc-convert-snippet)
+
 " Fugitive
 nmap <Leader>g [fzf-p]
 xmap <Leader>g [fzf-p]
 
 nnoremap <silent> [fzf-p]s     :Git<CR>
+nnoremap <silent> [fzf-p]l     :Flog<CR>
 nnoremap <silent> [fzf-p]j     :diffget //2<CR>
 nnoremap <silent> [fzf-p]k     :diffget //3<CR>
 nnoremap <silent> [fzf-p]a     :CocCommand fzf-preview.GitActions<CR>
@@ -376,7 +399,7 @@ nmap <leader>u  <Plug>(coc-codeaction-selected)
 " lua config for nvimtree
 lua << EOF
 require("nvim-tree").setup {
-  auto_close = true,
+  --auto_close = true,
   update_cwd = true,
   update_focused_file = {
     enable = true,
