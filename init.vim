@@ -2,17 +2,15 @@ nnoremap <SPACE> <Nop>
 let mapleader =" "
 
 if ! filereadable(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/plug.vim"'))
-	echo "Downloading junegunn/vim-plug to manage plugins..."
-	silent !mkdir -p ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/
-	silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/plug.vim
-	autocmd VimEnter * PlugInstall
+echo "Downloading junegunn/vim-plug to manage plugins..."
+silent !mkdir -p ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/
+silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/plug.vim
+autocmd VimEnter * PlugInstall
 endif
 
 call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"'))
 Plug 'tpope/vim-surround'
 Plug 'junegunn/goyo.vim'
-Plug 'jreybert/vimagit'
-Plug 'lukesmithxyz/vimling'
 Plug 'vimwiki/vimwiki'
 Plug 'tpope/vim-commentary'
 Plug 'ap/vim-css-color'
@@ -21,7 +19,7 @@ Plug 'ibhagwan/fzf-lua', {'branch': 'main'}
 Plug 'junegunn/fzf.vim'
 Plug 'stsewd/fzf-checkout.vim'
 Plug 'tpope/vim-fugitive'
-Plug 'sbdchd/neoformat'
+" Plug 'sbdchd/neoformat'
 Plug 'itchyny/vim-gitbranch'
 Plug 'wakatime/vim-wakatime'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -32,42 +30,38 @@ Plug 'preservim/nerdcommenter'
 Plug 'keyvchan/vim-monokai'
 Plug 'crusoexia/vim-javascript-lib'
 Plug 'maxmellon/vim-jsx-pretty'
-Plug 'dikiaap/minimalist'
+" Plug 'dikiaap/minimalist'
 Plug 'yuezk/vim-js'
 Plug 'mhinz/vim-startify'
 Plug 'nvie/vim-flake8'
 Plug 'tpope/vim-repeat'
 Plug 'iamcco/markdown-preview.vim'
 Plug 'ryanoasis/vim-devicons'
-" Plug 'preservim/nerdtree'
-" Plug 'PhilRunninger/nerdtree-visual-selection'
-" Plug 'hankchiutw/nerdtree-ranger.vim'
 Plug 'navarasu/onedark.nvim'
 Plug 'ThePrimeagen/harpoon'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'github/copilot.vim'
-Plug 'phaazon/hop.nvim'
-Plug 'wellle/context.vim'
+" Plug 'wellle/context.vim'
 Plug 'AndrewRadev/tagalong.vim'
 Plug 'nvim-tree/nvim-tree.lua'
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
-Plug 'prisma/vim-prisma'
-Plug 'nanotech/jellybeans.vim'
-Plug 'tomasr/molokai'
+" Plug 'prisma/vim-prisma'
 Plug 'jacoborus/tender.vim'
 Plug 'jparise/vim-graphql'
-Plug 'chrisbra/csv.vim'
 Plug 'ThePrimeagen/vim-be-good'
 Plug 'tpope/vim-unimpaired'
 Plug 'benwainwright/fzf-project'
 Plug 'vim-airline/vim-airline'
 Plug 'mbbill/undotree'
 Plug 'rbong/vim-flog'
+Plug 'nvim-tree/nvim-tree.lua'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'nvim-tree/nvim-web-devicons'
 call plug#end()
 
-let g:jellybeans_use_term_italics = 1
+" let g:jellybeans_use_term_italics = 1
 let g:rustfmt_autosave = 1
 let g:rust_cargo_use_clippy = 1
 let g:csv_arrange_align ='l*'
@@ -121,103 +115,92 @@ let g:onedark_config = {
 xmap p "_dP
 
 colorscheme onedark
-" colorscheme molokai
-" set termguicolors
-let g:vim_jsx_pretty_template_tags=['html','js','jsx']
-
-:echo gitbranch#name()
+" let g:vim_jsx_pretty_template_tags=['html','js','jsx']
 
 " Some basics:
-  nnoremap n nzz
-  nnoremap N Nzz
-	nnoremap c "_c
-	set nocompatible
-	filetype plugin on
-	syntax on
-	set encoding=utf-8
-  map <TAB> %
-  map <leader>pi :PlugInstall<CR>
-  map <leader>pc :PlugClean<CR>
-  map <leader>s :source ~/.config/nvim/init.vim<CR>
-  map <leader><leader> :w<CR>
-  map <leader>q :q<CR>
-  map <leader>wq :wq<CR>
-  map <leader>l :bnext<cr>
-  map <leader>h :bprevious<cr>
-  tnoremap <C-n> <C-\><C-n>
-  map <C-t> :vsp <CR> :terminal<CR>
-  map <C-f> <C-f>zz
+nnoremap n nzz
+nnoremap N Nzz
+nnoremap c "_c
+set nocompatible
+filetype plugin on
+syntax on
+set encoding=utf-8
+map <TAB> %
+map <leader>pi :PlugInstall<CR>
+map <leader>pc :PlugClean<CR>
+map <leader>s :source ~/.config/nvim/init.vim<CR>
+map <leader><leader> :w<CR>
+map <leader>q :q<CR>
+map <leader>wq :wq<CR>
+map <leader>l :bnext<cr>
+map <leader>h :bprevious<cr>
+tnoremap <C-n> <C-\><C-n>
+map <C-t> :vsp <CR> :terminal<CR>
+map <C-f> <C-f>zz
 
 " Enable autocompletion:
-	set wildmode=longest,list,full
+set wildmode=longest,list,full
 " Disables automatic commenting on newline:
-	autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 " Perform dot commands over visual blocks:
-	vnoremap . :normal .<CR>
+vnoremap . :normal .<CR>
 " Goyo plugin makes text more readable when writing prose:
-	map <leader>m :Goyo \| set bg=dark \| set linebreak<CR>
+map <leader>m :Goyo \| set bg=dark \| set linebreak<CR>
 " Spell-check set to <leader>o, 'o' for 'orthography':
-	map <leader>o :setlocal spell! spelllang=en_us<CR>
+map <leader>o :setlocal spell! spelllang=en_us<CR>
 " Splits open at the bottom and right, which is non-retarded, unlike vim defaults.
-	set splitbelow splitright
+set splitbelow splitright
 
 " Shortcutting split navigation, saving a keypress:
- map <leader>h <C-w>h
- map <leader>j <C-w>j
- map <leader>k <C-w>k
- map <leader>l <C-w>l
+map <leader>h <C-w>h
+map <leader>j <C-w>j
+map <leader>k <C-w>k
+map <leader>l <C-w>l
 
 " Replace ex mode with
-	map Q @@
-
-" Check file in shellcheck:
-	map <leader>sc :!clear && shellcheck -x %<CR>
-
-"Open my bibliography file in split
-"map <leader>b :vsp<space>$BIB<CR>
-"map <leader>r :vsp<space>$REFER<CR>
+map Q @@
 
 " Replace all is aliased to S.
-	nnoremap S :%s//g<Left><Left>
+nnoremap S :%s//g<Left><Left>
 
 " Compile document, be it groff/LaTeX/markdown/etc.
-	map <C-p> :Pandoc pdf<CR>
+map <C-p> :Pandoc pdf<CR>
 
 " Open corresponding .pdf/.html or preview
-	map <leader>p :!opout <c-r>%<CR><CR>
+map <leader>p :!opout <c-r>%<CR><CR>
 
 " Runs a script that cleans out tex build files whenever I close out of a .tex file.
-	autocmd VimLeave *.tex !texclear %
+autocmd VimLeave *.tex !texclear %
 
 " Ensure files are read as what I want: let g:vimwiki_ext2syntax = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
-	" map <leader>v :VimwikiIndex
-	let g:vimwiki_list = [{'path': '~/vimwiki', 'syntax': 'markdown', 'ext': '.md'}]
-	autocmd BufRead,BufNewFile /tmp/calcurse*,~/.calcurse/notes/* set filetype=markdown
-	autocmd BufRead,BufNewFile *.ms,*.me,*.mom,*.man set filetype=groff
-	autocmd BufRead,BufNewFile *.tex set filetype=tex
+" map <leader>v :VimwikiIndex
+let g:vimwiki_list = [{'path': '~/vimwiki', 'syntax': 'markdown', 'ext': '.md'}]
+autocmd BufRead,BufNewFile /tmp/calcurse*,~/.calcurse/notes/* set filetype=markdown
+autocmd BufRead,BufNewFile *.ms,*.me,*.mom,*.man set filetype=groff
+autocmd BufRead,BufNewFile *.tex set filetype=tex
   au filetype vimwiki silent! iunmap <buffer> <Tab>
 
 " Save file as sudo on files that require root permission
-	cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
+cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
 " Enable Goyo by default for mutt writing
-	autocmd BufRead,BufNewFile /tmp/neomutt* let g:goyo_width=80
-	autocmd BufRead,BufNewFile /tmp/neomutt* :Goyo | set bg=dark
-	autocmd BufRead,BufNewFile /tmp/neomutt* map ZZ :Goyo\|x!<CR>
-	autocmd BufRead,BufNewFile /tmp/neomutt* map ZQ :Goyo\|q!<CR>
+autocmd BufRead,BufNewFile /tmp/neomutt* let g:goyo_width=80
+autocmd BufRead,BufNewFile /tmp/neomutt* :Goyo | set bg=dark
+autocmd BufRead,BufNewFile /tmp/neomutt* map ZZ :Goyo\|x!<CR>
+autocmd BufRead,BufNewFile /tmp/neomutt* map ZQ :Goyo\|q!<CR>
 
 " Automatically deletes all trailing whitespace and newlines at end of file on save.
-	autocmd BufWritePre * %s/\s\+$//e
-	autocmd BufWritePre * %s/\n\+\%$//e
-	autocmd BufWritePre *.[ch] %s/\%$/\r/e
+autocmd BufWritePre * %s/\s\+$//e
+autocmd BufWritePre * %s/\n\+\%$//e
+autocmd BufWritePre *.[ch] %s/\%$/\r/e
 
 " When shortcut files are updated, renew bash and ranger configs with new material:
-	autocmd BufWritePost bm-files,bm-dirs !shortcuts
+autocmd BufWritePost bm-files,bm-dirs !shortcuts
 " Run xrdb whenever Xdefaults or Xresources are updated.
-	autocmd BufRead,BufNewFile Xresources,Xdefaults,xresources,xdefaults set filetype=xdefaults
-	autocmd BufWritePost Xresources,Xdefaults,xresources,xdefaults !xrdb %
+autocmd BufRead,BufNewFile Xresources,Xdefaults,xresources,xdefaults set filetype=xdefaults
+autocmd BufWritePost Xresources,Xdefaults,xresources,xdefaults !xrdb %
 " Recompile dwmblocks on config edit.
-	autocmd BufWritePost ~/.local/src/dwmblocks/config.h !cd ~/.local/src/dwmblocks/; sudo make install && { killall -q dwmblocks;setsid -f dwmblocks }
+autocmd BufWritePost ~/.local/src/dwmblocks/config.h !cd ~/.local/src/dwmblocks/; sudo make install && { killall -q dwmblocks;setsid -f dwmblocks }
 
 " Turns off highlighting on the bits of code that are changed, so the line that is changed is highlighted but the actual text that has changed stands out on the line and is readable.
 if &diff
@@ -228,7 +211,7 @@ endif
 let g:fzf_layout = {'window':{'width':0.8,'height':0.8}}
 nnoremap <leader>f :CocCommand fzf-preview.ProjectMruFiles<CR>
 nnoremap <leader>Ff :CocCommand fzf-preview.MruFiles<CR>
-nnoremap <leader>r :Rg<CR>
+nnoremap <leader>r :FzfLua grep_project<CR>
 nnoremap <leader>b :Buffer<CR>
 
 let FZF_DEFAULT_COMMAND='rg --files'
@@ -358,8 +341,8 @@ sunmap e
 
 " Airline
 
-" let g:airline#extensions#tabline#enabled = 1
-" let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 let g:airline_powerline_fonts = 1
 let g:airline_theme='distinguished'
 
@@ -398,53 +381,106 @@ nmap <leader>u  <Plug>(coc-codeaction-selected)
 
 " lua config for nvimtree
 lua << EOF
+local function on_attach(bufnr)
+  local api = require('nvim-tree.api')
+
+  local function opts(desc)
+    return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+  end
+
+
+  -- Default mappings. Feel free to modify or remove as you wish.
+  --
+  -- BEGIN_DEFAULT_ON_ATTACH
+  vim.keymap.set('n', '<C-]>', api.tree.change_root_to_node,          opts('CD'))
+  vim.keymap.set('n', '<C-e>', api.node.open.replace_tree_buffer,     opts('Open: In Place'))
+  vim.keymap.set('n', '<C-k>', api.node.show_info_popup,              opts('Info'))
+  vim.keymap.set('n', '<C-r>', api.fs.rename_sub,                     opts('Rename: Omit Filename'))
+  vim.keymap.set('n', '<C-t>', api.node.open.tab,                     opts('Open: New Tab'))
+  vim.keymap.set('n', '<C-v>', api.node.open.vertical,                opts('Open: Vertical Split'))
+  vim.keymap.set('n', '<C-x>', api.node.open.horizontal,              opts('Open: Horizontal Split'))
+  vim.keymap.set('n', '<BS>',  api.node.navigate.parent_close,        opts('Close Directory'))
+  vim.keymap.set('n', '<CR>',  api.node.open.edit,                    opts('Open'))
+  vim.keymap.set('n', '<Tab>', api.node.open.preview,                 opts('Open Preview'))
+  vim.keymap.set('n', '>',     api.node.navigate.sibling.next,        opts('Next Sibling'))
+  vim.keymap.set('n', '<',     api.node.navigate.sibling.prev,        opts('Previous Sibling'))
+  vim.keymap.set('n', '.',     api.node.run.cmd,                      opts('Run Command'))
+  vim.keymap.set('n', '-',     api.tree.change_root_to_parent,        opts('Up'))
+  vim.keymap.set('n', 'a',     api.fs.create,                         opts('Create'))
+  vim.keymap.set('n', 'bmv',   api.marks.bulk.move,                   opts('Move Bookmarked'))
+  vim.keymap.set('n', 'B',     api.tree.toggle_no_buffer_filter,      opts('Toggle No Buffer'))
+  vim.keymap.set('n', 'c',     api.fs.copy.node,                      opts('Copy'))
+  vim.keymap.set('n', 'C',     api.tree.toggle_git_clean_filter,      opts('Toggle Git Clean'))
+  vim.keymap.set('n', '[c',    api.node.navigate.git.prev,            opts('Prev Git'))
+  vim.keymap.set('n', ']c',    api.node.navigate.git.next,            opts('Next Git'))
+  vim.keymap.set('n', 'd',     api.fs.remove,                         opts('Delete'))
+  vim.keymap.set('n', 'D',     api.fs.trash,                          opts('Trash'))
+  vim.keymap.set('n', 'E',     api.tree.expand_all,                   opts('Expand All'))
+  vim.keymap.set('n', 'e',     api.fs.rename_basename,                opts('Rename: Basename'))
+  vim.keymap.set('n', ']e',    api.node.navigate.diagnostics.next,    opts('Next Diagnostic'))
+  vim.keymap.set('n', '[e',    api.node.navigate.diagnostics.prev,    opts('Prev Diagnostic'))
+  vim.keymap.set('n', 'F',     api.live_filter.clear,                 opts('Clean Filter'))
+  vim.keymap.set('n', 'f',     api.live_filter.start,                 opts('Filter'))
+  vim.keymap.set('n', 'g?',    api.tree.toggle_help,                  opts('Help'))
+  vim.keymap.set('n', 'gy',    api.fs.copy.absolute_path,             opts('Copy Absolute Path'))
+  vim.keymap.set('n', 'H',     api.tree.toggle_hidden_filter,         opts('Toggle Dotfiles'))
+  vim.keymap.set('n', 'I',     api.tree.toggle_gitignore_filter,      opts('Toggle Git Ignore'))
+  vim.keymap.set('n', 'J',     api.node.navigate.sibling.last,        opts('Last Sibling'))
+  vim.keymap.set('n', 'K',     api.node.navigate.sibling.first,       opts('First Sibling'))
+  vim.keymap.set('n', 'm',     api.marks.toggle,                      opts('Toggle Bookmark'))
+  vim.keymap.set('n', 'o',     api.node.open.edit,                    opts('Open'))
+  vim.keymap.set('n', 'O',     api.node.open.no_window_picker,        opts('Open: No Window Picker'))
+  vim.keymap.set('n', 'p',     api.fs.paste,                          opts('Paste'))
+  vim.keymap.set('n', 'P',     api.node.navigate.parent,              opts('Parent Directory'))
+  vim.keymap.set('n', 'q',     api.tree.close,                        opts('Close'))
+  vim.keymap.set('n', 'r',     api.fs.rename,                         opts('Rename'))
+  vim.keymap.set('n', 'R',     api.tree.reload,                       opts('Refresh'))
+  vim.keymap.set('n', 's',     api.node.run.system,                   opts('Run System'))
+  vim.keymap.set('n', 'S',     api.tree.search_node,                  opts('Search'))
+  vim.keymap.set('n', 'U',     api.tree.toggle_custom_filter,         opts('Toggle Hidden'))
+  vim.keymap.set('n', 'W',     api.tree.collapse_all,                 opts('Collapse'))
+  vim.keymap.set('n', 'x',     api.fs.cut,                            opts('Cut'))
+  vim.keymap.set('n', 'y',     api.fs.copy.filename,                  opts('Copy Name'))
+  vim.keymap.set('n', 'Y',     api.fs.copy.relative_path,             opts('Copy Relative Path'))
+  vim.keymap.set('n', '<2-LeftMouse>',  api.node.open.edit,           opts('Open'))
+  vim.keymap.set('n', '<2-RightMouse>', api.tree.change_root_to_node, opts('CD'))
+  -- END_DEFAULT_ON_ATTACH
+
+
+  -- Mappings migrated from view.mappings.list
+  --
+  -- You will need to insert "your code goes here" for any mappings with a custom action_cb
+  vim.keymap.set('n', 'l', api.node.open.edit, opts('Open'))
+  vim.keymap.set('n', '<CR>', api.node.open.edit, opts('Open'))
+  vim.keymap.set('n', 'o', api.node.open.edit, opts('Open'))
+  vim.keymap.set('n', 'h', api.node.navigate.parent_close, opts('Close Directory'))
+  vim.keymap.set('n', 'v', api.node.open.vertical, opts('Open: Vertical Split'))
+  vim.keymap.set('n', 's', api.node.open.horizontal, opts('Open: Horizontal Split'))
+  vim.keymap.set('n', 't', api.node.open.tab, opts('Open: New Tab'))
+  vim.keymap.set('n', '<CR>', api.tree.change_root_to_node, opts('CD'))
+  vim.keymap.set('n', '<BS>', api.tree.change_root_to_parent, opts('Up'))
+  vim.keymap.set('n', 'q', api.tree.close, opts('Close'))
+  vim.keymap.set('n', 'g?', api.tree.toggle_help, opts('Help'))
+
+end
+
 require("nvim-tree").setup {
-  --auto_close = true,
+  on_attach = on_attach,
   update_cwd = true,
-  update_focused_file = {
+    update_focused_file = {
     enable = true,
     update_cwd = true,
   },
+
   view = {
     width = 30,
     side = "left",
     auto_resize = true,
-    mappings = {
-      custom_only = false,
-      list = {
-        { key = { "l", "<CR>", "o" }, cb = require("nvim-tree.config").nvim_tree_callback("edit") },
-        { key = { "h" }, cb = require("nvim-tree.config").nvim_tree_callback("close_node") },
-        { key = { "v" }, cb = require("nvim-tree.config").nvim_tree_callback("vsplit") },
-        { key = { "s" }, cb = require("nvim-tree.config").nvim_tree_callback("split") },
-        { key = { "t" }, cb = require("nvim-tree.config").nvim_tree_callback("tabnew") },
-        { key = { "<CR>" }, cb = require("nvim-tree.config").nvim_tree_callback("cd") },
-        { key = { "<BS>" }, cb = require("nvim-tree.config").nvim_tree_callback("dir_up") },
-        { key = { "q" }, cb = require("nvim-tree.config").nvim_tree_callback("close") },
-        { key = { "g?" }, cb = require("nvim-tree.config").nvim_tree_callback("toggle_help") },
-      },
-    },
   },
-}
-
-EOF
-
-lua << EOF
-vim.cmd [[highlight IndentBlanklineIndent1 guifg=#E06C75 gui=nocombine]]
-vim.cmd [[highlight IndentBlanklineIndent2 guifg=#E5C07B gui=nocombine]]
-vim.cmd [[highlight IndentBlanklineIndent3 guifg=#98C379 gui=nocombine]]
-vim.cmd [[highlight IndentBlanklineIndent4 guifg=#56B6C2 gui=nocombine]]
-vim.cmd [[highlight IndentBlanklineIndent5 guifg=#61AFEF gui=nocombine]]
-vim.cmd [[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]]
-
-
-require("indent_blankline").setup {
-    space_char_blankline = " ",
-    show_end_of_line = false,
-    auto_close = false,
 }
 
 EOF
 
 let g:pandoc#modules#disabled = ["spell"]
 let g:fzfSwitchProjectWorkspaces = [ '~/Work/Udja', '~/Work/projects', '~/Work/Training\ Area' ]
-nnoremap <leader>Fp :FzfSwitchProject<CR>
+nnoremap <leader>P :FzfSwitchProject<CR>
