@@ -1,93 +1,66 @@
-vim.cmd([[
-set title
-set shiftwidth=2
-set tabstop=2
-set expandtab
-set bg=dark
-set go=a
-set mouse=a
-set nohlsearch
-set clipboard+=unnamedplus
-set noshowmode
-set noruler
-set laststatus=0
-set noshowcmd
-set smartcase
-set scrolloff=10
-set cursorline
-set so=20
-set nobackup
-set nowb
-set noswapfile
-set hidden
-set number relativenumber
-set lazyredraw
-set magic
-map <C-l> :bnext<cr>
-map <C-h> :bprevious<cr>
-map <C-c> :bd<cr>
-map <leader>, :edit ~/.config/nvim/init.vim<CR>
-map { {zz
-map } }zz
-set showmode
-set ruler
-set laststatus=2
-set showcmd
-let g:airline_powerline_fonts = 1
-set splitbelow
+-- General settings
+vim.opt.title = true
+vim.opt.shiftwidth = 2
+vim.opt.tabstop = 2
+vim.opt.expandtab = true
+vim.opt.bg = "dark"
+vim.opt.go = "a"
+vim.opt.mouse = "a"
+vim.opt.hlsearch = false
+vim.opt.clipboard:append("unnamedplus")
+vim.opt.showmode = false
+vim.opt.ruler = false
+vim.opt.laststatus = 0
+vim.opt.showcmd = false
+vim.opt.smartcase = true
+vim.opt.scrolloff = 10
+vim.opt.cursorline = true
+vim.opt.so = 20
+vim.opt.backup = false
+vim.opt.writebackup = false
+vim.opt.swapfile = false
+vim.opt.hidden = true
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.lazyredraw = true
+vim.opt.magic = true
+vim.opt.showmode = true
+vim.opt.ruler = true
+vim.opt.laststatus = 2
+vim.opt.showcmd = true
+vim.opt.splitbelow = true
+vim.o.updatetime = 50
+vim.opt.backup = false
+vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
+vim.opt.undofile = true
 
-nnoremap <leader>e :NERDTreeToggle %<CR>
-map <leader>h <C-w>h
-map <leader>j <C-w>j
-map <leader>k <C-w>k
-map <leader>l <C-w>l
+-- Vimwiki configuration
+vim.g.vimwiki_ext2syntax = {
+	[".Rmd"] = "markdown",
+	[".rmd"] = "markdown",
+	[".md"] = "markdown",
+	[".markdown"] = "markdown",
+	[".mdown"] = "markdown",
+}
+vim.api.nvim_set_keymap("n", "<leader>v", ":VimwikiIndex", { noremap = true })
+vim.g.vimwiki_list = { { path = "~/vimwiki", syntax = "markdown", ext = ".md" } }
 
-nnoremap n nzz
-nnoremap N Nzz
-nnoremap c "_c
-set nocompatible
-filetype plugin on
-syntax on
-set encoding=utf-8
-map <TAB> %
-map <leader>pi :PackerInstall<CR>
-map <leader>pc :PackerClean<CR>
-map <leader><leader> :w<CR>
-map <leader>q :q<CR>
-map <leader>wq :wq<CR>
-map <c-l> :bnext<cr>
-map <c-h> :bprevious<cr>
+-- Autocommands
+vim.cmd("autocmd BufRead,BufNewFile /tmp/calcurse*,~/.calcurse/notes/* set filetype=markdown")
+vim.cmd("autocmd BufRead,BufNewFile *.ms,*.me,*.mom,*.man set filetype=groff")
+vim.cmd("autocmd BufRead,BufNewFile *.tex set filetype=tex")
 
-let g:vimwiki_ext2syntax = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
-map <leader>v :VimwikiIndex
-let g:vimwiki_list = [{'path': '~/vimwiki', 'syntax': 'markdown', 'ext': '.md'}]
-autocmd BufRead,BufNewFile /tmp/calcurse*,~/.calcurse/notes/* set filetype=markdown
-autocmd BufRead,BufNewFile *.ms,*.me,*.mom,*.man set filetype=groff
-autocmd BufRead,BufNewFile *.tex set filetype=tex
+-- FZF settings
+vim.g.fzf_layout = { window = { width = 0.8, height = 0.8 } }
+vim.api.nvim_set_keymap("n", "<leader>b", ":Buffer<CR>", { noremap = true })
+vim.g.FZF_DEFAULT_COMMAND = "rg --files"
+vim.g.FZF_DEFAULT_OPTS = "-m --height 50% --border --reverse"
+vim.cmd(
+	'command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case " .. vim.fn.shellescape(<q-args>), 1, { "options": "--delimiter : --nth 4.." }, <bang>0)'
+)
 
-let g:fzf_layout = {'window':{'width':0.8,'height':0.8}}
-nnoremap <leader>b :Buffer<CR>
-
-let FZF_DEFAULT_COMMAND='rg --files'
-let FZF_DEFAULT_OPTS='-m --height 50% --border --reverse'
-
-command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
-
-nmap <Leader>g [fzf-p]
-xmap <Leader>g [fzf-p]
-
-nnoremap <silent> [fzf-p]s     :Git<CR>
-nnoremap <silent> [fzf-p]j     :diffget //2<CR>
-nnoremap <silent> [fzf-p]k     :diffget //3<CR>
-nnoremap <silent> [fzf-p]ps    :!sh ~/.scripts/origin.sh<CR>
-nnoremap <silent> [fzf-p]pl    :Git pull<CR>
-nnoremap <silent> [fzf-p]c     :GBranches<CR>
-nnoremap <silent> [fzf-p]t     :Git stash<CR>
-nnoremap <silent> [fzf-p]tp     :Git stash pop<CR>
-
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#formatter = 'unique_tail'
-let g:airline_powerline_fonts = 1
-let g:airline_theme='murmur'
-
-]])
+-- Airline settings
+vim.g.airline_extensions_tabline_enabled = 1
+vim.g.airline_extensions_tabline_formatter = "unique_tail"
+vim.g.airline_powerline_fonts = 1
+vim.g.airline_theme = "murmur"

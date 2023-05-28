@@ -3,6 +3,7 @@ vim.cmd([[packadd packer.nvim]])
 return require("packer").startup(function(use)
 	-- Packer can manage itself
 	use("wbthomason/packer.nvim")
+	use("mbbill/undotree")
 
 	use("hrsh7th/cmp-nvim-lsp")
 	use("hrsh7th/cmp-buffer")
@@ -10,7 +11,6 @@ return require("packer").startup(function(use)
 	use("hrsh7th/cmp-cmdline")
 	use("hrsh7th/nvim-cmp")
 	use("saadparwaiz1/cmp_luasnip")
-	use({ "tzachar/cmp-tabnine", run = "./install.sh", requires = "hrsh7th/nvim-cmp" })
 	use("nvim-treesitter/nvim-treesitter")
 	use("windwp/nvim-ts-autotag")
 
@@ -47,7 +47,9 @@ return require("packer").startup(function(use)
 	use("navarasu/onedark.nvim")
 	use("vwxyutarooo/nerdtree-devicons-syntax")
 	use("jose-elias-alvarez/null-ls.nvim")
+	use("nvim-treesitter/nvim-treesitter-context")
 	use("nvim-lua/plenary.nvim")
+	use("kawarimidoll/mru_cache.lua")
 	use({
 		"ibhagwan/fzf-lua",
 		-- optional for icon support
@@ -64,13 +66,13 @@ return require("packer").startup(function(use)
 			})
 		end,
 	})
-  use {
-    'nvim-tree/nvim-tree.lua',
-    requires = {
-      'nvim-tree/nvim-web-devicons', -- optional
-    },
-    config = function()
-      require("nvim-tree").setup {}
-    end
-  }
+	use({
+		"nvim-tree/nvim-tree.lua",
+		requires = {
+			"nvim-tree/nvim-web-devicons", -- optional
+		},
+		config = function()
+			require("nvim-tree").setup({})
+		end,
+	})
 end)

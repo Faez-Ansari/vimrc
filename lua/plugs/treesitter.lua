@@ -4,6 +4,7 @@ if not status then
 end
 
 ts.setup({
+	auto_install = true,
 	highlight = {
 		enable = true,
 		disable = {},
@@ -13,13 +14,16 @@ ts.setup({
 		disable = {},
 	},
 	ensure_installed = {
+		"javascript",
+		"typescript",
 		"tsx",
 		"json",
-		"yaml",
 		"css",
 		"html",
 		"lua",
 		"python",
+		"vim",
+		"vimdoc",
 	},
 	autotag = {
 		enable = true,

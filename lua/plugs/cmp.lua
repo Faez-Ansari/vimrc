@@ -18,7 +18,6 @@ cmp.setup({
 	},
 	sources = {
 		{ name = "path" },
-		{ name = "TabNine" },
 		{ name = "nvim_lsp", keyword_length = 3 },
 		{ name = "buffer", keyword_length = 3 },
 		{ name = "luasnip" },
@@ -77,5 +76,3 @@ cmp.setup({
 })
 
 require("luasnip.loaders.from_vscode").lazy_load()
-local tabnine = require("cmp_tabnine.config")
-tabnine.setup({ max_lines = 1000, max_num_results = 20, sort = true })
