@@ -1,5 +1,6 @@
+-- Lua
 require('onedark').setup {
     style = 'darker',
-    transparent = true
+    transparent = true,  -- Show/hide background
 }
 require('onedark').load()

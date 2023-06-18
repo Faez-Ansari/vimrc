@@ -1,11 +1,12 @@
 vim.g.mapleader = " "
-vim.keymap.set("n", "<leader>f", "<cmd>lua require('fzf-lua').git_files()<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>f", "<cmd>FzfLua mru<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>F", "<cmd>FzfLua <CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>r", "<cmd>lua require('fzf-lua').grep_project()<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>,", "<cmd>e ~/.config/nvim/init.lua<CR>")
 vim.keymap.set("n", "<leader>s", "<cmd>so ~/.config/nvim/init.lua<CR>")
 
 -- Key mappings
-vim.api.nvim_set_keymap("n","<leader>e", ":NvimTreeToggle<CR>", {noremap = true})
+vim.api.nvim_set_keymap("n","<leader>e", ":NERDTreeToggle % <CR>", {noremap = true})
 vim.api.nvim_set_keymap("n", "<leader>h", "<C-w>h", { noremap = true })
 vim.api.nvim_set_keymap("n", "<leader>j", "<C-w>j", { noremap = true })
 vim.api.nvim_set_keymap("n", "<leader>k", "<C-w>k", { noremap = true })
@@ -14,6 +15,7 @@ vim.api.nvim_set_keymap("n", "n", "nzz", { noremap = true })
 vim.api.nvim_set_keymap("n", "N", "Nzz", { noremap = true })
 vim.api.nvim_set_keymap("n", "c", '"_c', { noremap = true })
 vim.api.nvim_set_keymap("n", "<TAB>", "%", { noremap = true })
+vim.api.nvim_set_keymap("v", "<TAB>", "%", { noremap = true })
 vim.api.nvim_set_keymap("n", "<leader><leader>", ":w<CR>", { noremap = true })
 vim.api.nvim_set_keymap("n", "<leader>q", ":q<CR>", { noremap = true })
 vim.api.nvim_set_keymap("n", "<leader>wq", ":wq<CR>", { noremap = true })
