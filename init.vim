@@ -19,7 +19,6 @@ Plug 'ibhagwan/fzf-lua', {'branch': 'main'}
 Plug 'junegunn/fzf.vim'
 Plug 'stsewd/fzf-checkout.vim'
 Plug 'tpope/vim-fugitive'
-" Plug 'sbdchd/neoformat'
 Plug 'itchyny/vim-gitbranch'
 Plug 'wakatime/vim-wakatime'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -30,7 +29,6 @@ Plug 'preservim/nerdcommenter'
 Plug 'keyvchan/vim-monokai'
 Plug 'crusoexia/vim-javascript-lib'
 Plug 'maxmellon/vim-jsx-pretty'
-" Plug 'dikiaap/minimalist'
 Plug 'yuezk/vim-js'
 Plug 'mhinz/vim-startify'
 Plug 'nvie/vim-flake8'
@@ -41,13 +39,11 @@ Plug 'navarasu/onedark.nvim'
 Plug 'ThePrimeagen/harpoon'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'github/copilot.vim'
-" Plug 'wellle/context.vim'
 Plug 'AndrewRadev/tagalong.vim'
 Plug 'nvim-tree/nvim-tree.lua'
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
-" Plug 'prisma/vim-prisma'
 Plug 'jacoborus/tender.vim'
 Plug 'jparise/vim-graphql'
 Plug 'ThePrimeagen/vim-be-good'
@@ -59,6 +55,10 @@ Plug 'rbong/vim-flog'
 Plug 'nvim-tree/nvim-tree.lua'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'nvim-tree/nvim-web-devicons'
+Plug 'folke/tokyonight.nvim'
+Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'oxfist/night-owl.nvim'
+" Plug 'f-person/git-blame.nvim'
 call plug#end()
 
 " let g:jellybeans_use_term_italics = 1
@@ -106,7 +106,7 @@ set showcmd
 autocmd VimResized * wincmd =
 
 let g:onedark_config = {
-  \ 'style': 'deep',
+ \ 'style': 'deep',
   \ 'ending_tildes': v:true,
   \ 'transparent': v:true,
 \ }
@@ -114,7 +114,7 @@ let g:onedark_config = {
 " Keep the copy after select pasting
 xmap p "_dP
 
-colorscheme onedark
+colorscheme night-owl
 " let g:vim_jsx_pretty_template_tags=['html','js','jsx']
 
 " Some basics:
@@ -126,17 +126,22 @@ filetype plugin on
 syntax on
 set encoding=utf-8
 map <TAB> %
-map <leader>pi :PlugInstall<CR>
-map <leader>pc :PlugClean<CR>
-map <leader>s :source ~/.config/nvim/init.vim<CR>
-map <leader><leader> :w<CR>
-map <leader>q :q<CR>
-map <leader>wq :wq<CR>
-map <leader>l :bnext<cr>
-map <leader>h :bprevious<cr>
+nnoremap <leader>pi :PlugInstall<CR>
+nnoremap <leader>pc :PlugClean<CR>
+nnoremap <leader>s :source ~/.config/nvim/init.vim<CR>
+nnoremap <leader><leader> :w<CR>
+nnoremap <leader>q :q<CR>
+nnoremap <leader>wq :wq<CR>
+nnoremap <leader>l :bnext<cr>
+nnoremap <leader>h :bprevious<cr>
 tnoremap <C-n> <C-\><C-n>
 map <C-t> :vsp <CR> :terminal<CR>
 map <C-f> <C-f>zz
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
+nnoremap <C-b> <C-b>zz
+nnoremap <C-f> <C-f>zz
+
 
 " Enable autocompletion:
 set wildmode=longest,list,full
@@ -313,7 +318,7 @@ inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 ""multi-cursor
-nmap <expr> <silent> <C-d> <SID>select_current_word()
+" nmap <expr> <silent> <C-d> <SID>select_current_word()
 function! s:select_current_word()
   if !get(b:, 'coc_cursors_activated', 0)
     return "\<Plug>(coc-cursors-word)"
@@ -468,7 +473,7 @@ require("nvim-tree").setup {
   on_attach = on_attach,
   update_cwd = true,
     update_focused_file = {
-    enable = true,
+    --enable = true,
     update_cwd = true,
   },
 
@@ -481,6 +486,16 @@ require("nvim-tree").setup {
 
 EOF
 
+lua << EOF
+vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+EOF
+
+
+
 let g:pandoc#modules#disabled = ["spell"]
 let g:fzfSwitchProjectWorkspaces = [ '~/Work/Udja', '~/Work/projects', '~/Work/Training\ Area' ]
 nnoremap <leader>P :FzfSwitchProject<CR>
+
+" Undotree
+nnoremap <leader><F5> :UndotreeToggle<CR>
