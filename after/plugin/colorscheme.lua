@@ -1,6 +1,4 @@
--- Lua
-require('onedark').setup {
-    style = 'darker',
-    transparent = true,  -- Show/hide background
-}
-require('onedark').load()
+vim.cmd.colorscheme("night-owl")
+
+vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })

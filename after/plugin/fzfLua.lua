@@ -19,7 +19,7 @@ end
 
 fzf_lua.mru = function(args)
 	args.prompt = "MRU> "
-	local cmd = "git log --pretty='' --name-only | awk '!seen[$0]++'"
+	local cmd = 'git ls-files --full-name -z | xargs -0 -I{} -- stat -c"%Y %n" "{}" | sort -k1,1nr | cut -d" " -f2-'
 	local opts = gen_mru_opts(args)
 	fzf_lua.fzf_exec(cmd, opts)
 end

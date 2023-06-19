@@ -63,4 +63,12 @@ vim.cmd(
 vim.g.airline_extensions_tabline_enabled = 1
 vim.g.airline_extensions_tabline_formatter = "unique_tail"
 vim.g.airline_powerline_fonts = 1
-vim.g.airline_theme = "murmur"
+vim.g.airline_theme = "distinguished"
+
+-- disable netrw at the very start of your init.lua
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+-- set termguicolors to enable highlight groups
+vim.opt.termguicolors = true
+

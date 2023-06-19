@@ -4,33 +4,47 @@ return require("packer").startup(function(use)
 	-- Packer can manage itself
 	use("wbthomason/packer.nvim")
 	use("mbbill/undotree")
+  use {
+    'VonHeikemen/lsp-zero.nvim',
+    branch = 'v2.x',
+    requires = {
+      -- LSP Support
+      {'neovim/nvim-lspconfig'},             -- Required
+      {                                      -- Optional
+        'williamboman/mason.nvim',
+        run = function()
+          pcall(vim.cmd, 'MasonUpdate')
+        end,
+      },
+      {'williamboman/mason-lspconfig.nvim'}, -- Optional
 
-	use("hrsh7th/cmp-nvim-lsp")
+      -- Autocompletion
+      {'hrsh7th/nvim-cmp'},     -- Required
+      {'hrsh7th/cmp-nvim-lsp'}, -- Required
+      {'L3MON4D3/LuaSnip'},     -- Required
+    }
+  }
+  use({
+    "folke/lsp-trouble.nvim",
+    requires = "kyazdani42/nvim-web-devicons",
+    config = function()
+      require("trouble").setup({ })
+    end,
+  })
 	use("hrsh7th/cmp-buffer")
 	use("hrsh7th/cmp-path")
 	use("hrsh7th/cmp-cmdline")
-	use("hrsh7th/nvim-cmp")
 	use("saadparwaiz1/cmp_luasnip")
 	use("nvim-treesitter/nvim-treesitter")
 	use("windwp/nvim-ts-autotag")
-  use ("ilAYAli/scMRU.nvim")
 
 	use("echasnovski/mini.nvim")
-	use("neovim/nvim-lspconfig") -- Configurations for Nvim LSP
-	use("williamboman/mason.nvim")
 
 	use("rafamadriz/friendly-snippets")
-	use("L3MON4D3/LuaSnip")
   use("oxfist/night-owl.nvim")
-  use ({
-    "folke/tokyonight.nvim",
-    lazy = false,
-    priority = 1000,
-    opts = {},
-  })
+  use("navarasu/onedark.nvim")
 
   use("aca/emmet-ls")
-  use("williamboman/mason-lspconfig.nvim")
   use("tpope/vim-surround")
   use("jreybert/vimagit")
   use("vimwiki/vimwiki")
@@ -39,20 +53,7 @@ return require("packer").startup(function(use)
   use("tpope/vim-commentary")
   use("ap/vim-css-color")
   use("vijaymarupudi/nvim-fzf")
-  use {
-    'nvim-telescope/telescope.nvim', tag = '0.1.1',
-    -- or                            , branch = '0.1.x',
-    requires = { {'nvim-lua/plenary.nvim'} }
-  }
-  use {
-    'prochri/telescope-all-recent.nvim',
-    config = function()
-      require'telescope-all-recent'.setup{
-        -- your config goes here
-      }
-    end
-  }
-  use { "kkharji/sqlite.lua" }
+  use("kkharji/sqlite.lua")
   use("stsewd/fzf-checkout.vim")
   use("tpope/vim-fugitive")
   use("sbdchd/neoformat")
@@ -62,10 +63,11 @@ return require("packer").startup(function(use)
   use("preservim/nerdcommenter")
   use("keyvchan/vim-monokai")
   use("ryanoasis/vim-devicons")
+
   use("preservim/nerdtree")
   use("PhilRunninger/nerdtree-visual-selection")
   use("hankchiutw/nerdtree-ranger.vim")
-  use("navarasu/onedark.nvim")
+
   use("vwxyutarooo/nerdtree-devicons-syntax")
   use("jose-elias-alvarez/null-ls.nvim")
   use("nvim-treesitter/nvim-treesitter-context")
@@ -75,17 +77,6 @@ return require("packer").startup(function(use)
     -- optional for icon support
     requires = { "kyazdani42/nvim-web-devicons" },
     requries= {"vijaymarupudi/nvim-fzf"}
-  })
-  use({
-    "folke/lsp-trouble.nvim",
-    requires = "kyazdani42/nvim-web-devicons",
-    config = function()
-      require("trouble").setup({
-        -- your configuration comes here
-        -- or leave it empty to use the default settings
-        -- refer to the configuration section below
-      })
-    end,
   })
   use({
     "nvim-tree/nvim-tree.lua",

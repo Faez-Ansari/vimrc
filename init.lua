@@ -1,10 +1,3 @@
--- disable netrw at the very start of your init.lua
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
-
--- set termguicolors to enable highlight groups
-vim.opt.termguicolors = true
-
 -- empty setup using defaults
 require("nvim-tree").setup()
 
@@ -18,3 +11,8 @@ require("mason").setup()
 require("mason-lspconfig").setup()
 
 require("mini.pairs").setup()
+
+vim.cmd [[
+  imap <silent><script><expr> <Enter> copilot#Accept("\<CR>")
+  let g:copilot_no_tab_map = v:true
+]]
