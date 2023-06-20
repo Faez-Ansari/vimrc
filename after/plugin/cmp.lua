@@ -17,10 +17,10 @@ cmp.setup({
 	-- 	end,
 	-- },
 	sources = {
-    {name = 'path'},
-    {name = 'nvim_lsp'},
-    {name = 'buffer', keyword_length = 3},
-    {name = 'luasnip', keyword_length = 2},
+		{ name = "path" },
+		{ name = "nvim_lsp" },
+		{ name = "buffer", keyword_length = 3 },
+		{ name = "luasnip", keyword_length = 2 },
 	},
 	window = {
 		documentation = cmp.config.window.bordered(),
@@ -59,7 +59,7 @@ cmp.setup({
 			elseif has_words_before() then
 				cmp.complete()
 			else
-				fallback()
+				luasnip.expand_or_jumpable()
 			end
 		end, { "i", "s" }),
 
@@ -72,6 +72,8 @@ cmp.setup({
 				fallback()
 			end
 		end, { "i", "s" }),
+
+		["<Enter>"] = cmp.mapping.confirm({ select = true }),
 	},
 })
 

@@ -12,7 +12,9 @@ require("mason-lspconfig").setup()
 
 require("mini.pairs").setup()
 
-vim.cmd [[
-  imap <silent><script><expr> <Enter> copilot#Accept("\<CR>")
+vim.cmd([[
+  imap <silent><script><expr> <C-Space> copilot#Accept("\<CR>")
   let g:copilot_no_tab_map = v:true
-]]
+]])
+
+vim.cmd([[autocmd BufWritePre * :Neoformat]])

@@ -1,46 +1,46 @@
 vim.cmd([[packadd packer.nvim]])
 
 return require("packer").startup(function(use)
-	-- Packer can manage itself
-	use("wbthomason/packer.nvim")
-	use("mbbill/undotree")
+  -- Packer can manage itself
+  use("wbthomason/packer.nvim")
+  use("mbbill/undotree")
   use {
     'VonHeikemen/lsp-zero.nvim',
     branch = 'v2.x',
     requires = {
       -- LSP Support
-      {'neovim/nvim-lspconfig'},             -- Required
-      {                                      -- Optional
+      { 'neovim/nvim-lspconfig' }, -- Required
+      {                            -- Optional
         'williamboman/mason.nvim',
         run = function()
           pcall(vim.cmd, 'MasonUpdate')
         end,
       },
-      {'williamboman/mason-lspconfig.nvim'}, -- Optional
+      { 'williamboman/mason-lspconfig.nvim' }, -- Optional
 
       -- Autocompletion
-      {'hrsh7th/nvim-cmp'},     -- Required
-      {'hrsh7th/cmp-nvim-lsp'}, -- Required
-      {'L3MON4D3/LuaSnip'},     -- Required
+      { 'hrsh7th/nvim-cmp' },     -- Required
+      { 'hrsh7th/cmp-nvim-lsp' }, -- Required
+      { 'L3MON4D3/LuaSnip' },     -- Required
     }
   }
   use({
     "folke/lsp-trouble.nvim",
     requires = "kyazdani42/nvim-web-devicons",
     config = function()
-      require("trouble").setup({ })
+      require("trouble").setup({})
     end,
   })
-	use("hrsh7th/cmp-buffer")
-	use("hrsh7th/cmp-path")
-	use("hrsh7th/cmp-cmdline")
-	use("saadparwaiz1/cmp_luasnip")
-	use("nvim-treesitter/nvim-treesitter")
-	use("windwp/nvim-ts-autotag")
+  use("hrsh7th/cmp-buffer")
+  use("hrsh7th/cmp-path")
+  use("hrsh7th/cmp-cmdline")
+  use("saadparwaiz1/cmp_luasnip")
+  use("nvim-treesitter/nvim-treesitter")
+  use("windwp/nvim-ts-autotag")
 
-	use("echasnovski/mini.nvim")
+  use("echasnovski/mini.nvim")
 
-	use("rafamadriz/friendly-snippets")
+  use("rafamadriz/friendly-snippets")
   use("oxfist/night-owl.nvim")
   use("navarasu/onedark.nvim")
 
@@ -76,7 +76,7 @@ return require("packer").startup(function(use)
     "ibhagwan/fzf-lua",
     -- optional for icon support
     requires = { "kyazdani42/nvim-web-devicons" },
-    requries= {"vijaymarupudi/nvim-fzf"}
+    requries = { "vijaymarupudi/nvim-fzf" }
   })
   use({
     "nvim-tree/nvim-tree.lua",
