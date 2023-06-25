@@ -33,6 +33,8 @@ vim.o.updatetime = 50
 vim.opt.backup = false
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 vim.opt.undofile = true
+vim.opt.incsearch = true
+vim.opt.ignorecase = true
 
 -- Vimwiki configuration
 vim.g.vimwiki_ext2syntax = {
@@ -71,4 +73,3 @@ vim.g.loaded_netrwPlugin = 1
 
 -- set termguicolors to enable highlight groups
 vim.opt.termguicolors = true
-

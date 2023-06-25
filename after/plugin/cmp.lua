@@ -1,3 +1,4 @@
+local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
 
 local cmp = require("cmp")
@@ -9,6 +10,8 @@ local has_words_before = function()
 	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
 	return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
+
+cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 
 cmp.setup({
 	-- snippet = {
@@ -59,7 +62,7 @@ cmp.setup({
 			elseif has_words_before() then
 				cmp.complete()
 			else
-				luasnip.expand_or_jumpable()
+				fallback()
 			end
 		end, { "i", "s" }),
 
@@ -74,6 +77,9 @@ cmp.setup({
 		end, { "i", "s" }),
 
 		["<Enter>"] = cmp.mapping.confirm({ select = true }),
+		["<C-Enter>"] = cmp.mapping(function(fallback)
+			cmp.expand_or_jump()
+		end),
 	},
 })
 

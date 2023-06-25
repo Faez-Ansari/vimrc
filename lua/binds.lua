@@ -15,7 +15,13 @@ vim.api.nvim_set_keymap("n", "n", "nzz", { noremap = true })
 vim.api.nvim_set_keymap("n", "N", "Nzz", { noremap = true })
 vim.api.nvim_set_keymap("n", "c", '"_c', { noremap = true })
 
-vim.cmd([[ nnoremap <Tab> % ]])
+vim.api.nvim_set_keymap("n", "<TAB>", "%", { noremap = true })
+vim.api.nvim_set_keymap("v", "<TAB>", "%", { noremap = true })
+vim.api.nvim_set_keymap("o", "<TAB>", "%", { noremap = true })
+
+vim.cmd([[
+  nnoremap <TAB> %
+]])
 
 vim.api.nvim_set_keymap("n", "<leader><leader>", ":w<CR>", { noremap = true })
 vim.api.nvim_set_keymap("n", "<leader>q", ":q<CR>", { noremap = true })
